@@ -66,9 +66,10 @@ showFirstContactAsync() {
 }
 
 onHandleClick(name, number){
-  
+
 
   console.log('coucou', name, number)
+  // console.log(this.props.navigation)
 }
 
 // onSubmit(){

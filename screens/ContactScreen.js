@@ -8,6 +8,7 @@ import {
   Button,
   TouchableOpacity,
   View,
+  TextInput
 } from 'react-native';
 import { MonoText } from '../components/StyledText';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
@@ -22,14 +23,45 @@ export default class ContactScreen extends React.Component {
 
   };
 
+  constructor(){
+    super()
+    this.state ={
+      name : "",
+      number : ""
+    }
+  }
+
+  onChangeName(text){
+    this.setState({
+      name : text
+    })
+  }
+
+  onChangeNumber(text){
+    console.log(text)
+    this.setState({
+      number : text
+    })
+  }
+
 
   render(){
-
+          console.log(this.state.name)
+          console.log(this.state.number)
   	return(
 
       <View>
         <ScrollView style={{ width: "100%" , height: "100%"}}>
-        <Button title='AddContact' onPress={()=>{this.props.navigation.navigate('AddMyContact')}} />
+
+        <View style={{ padding : 10, margin: "auto"}}>
+          <TextInput value= {this.state.name} onChangeText= {(text)=>{ this.onChangeName(text)}} style={{borderColor: 'gray', borderWidth: 1, marginBottom: 10}} placeholder="Nom du contact" />
+          <TextInput   keyboardType = "numeric" value= {this.state.number} onChangeText = {(text)=>{this.onChangeNumber(text)}} style={{borderColor: 'gray', borderWidth: 1}} placeholder="Numero du contact" />
+        </View>
+        <Button title='AddContact' onPress={()=>{this.props.navigation.navigate('AddMyContact', {
+              itemId: 86,
+              otherParam: 'anything you want here',
+            })
+        }} />
         </ScrollView>
       </View>
 

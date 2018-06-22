@@ -7,7 +7,6 @@ import HomeScreen from '../screens/HomeScreen';
 import ContactScreen from '../screens/ContactScreen';
 import AlertScreen from '../screens/AlertScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import ContactScreen from'../screens/ContactScreen';
 import AddMyContactScreen from '../screens/AddMyContactScreen';
 
 
@@ -30,21 +29,6 @@ HomeStack.navigationOptions = {
   ),
 };
 
-
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-ContactStack.navigationOptions = {
-  tabBarLabel: 'Contacts',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-contact${focused ? '' : '-outline'}` : 'md-contact'}
-    />
-  ),
-};
 
 const AlertStack = createStackNavigator({
   Alert: AlertScreen,
@@ -91,10 +75,21 @@ ContactStack.navigationOptions = {
 };
 
 
-export default createBottomTabNavigator({
+export default createBottomTabNavigator(
+{
   HomeStack,
   ContactStack,
   AlertStack,
   SettingsStack,
   ContactStack
+},
+{ 
+
+  tabBarOptions : 
+  {
+    style: {
+     backgroundColor: 'blue',
+  }
+}
+
 });

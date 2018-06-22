@@ -2,6 +2,8 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import { Header } from 'react-native-elements';
+
 
 export default class App extends React.Component {
   state = {
@@ -20,7 +22,15 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          {Platform.OS === 'ios' &&
+          <Header
+            statusBarProps={{ barStyle: 'light-content', color:'white'  }}
+            centerComponent={{ text: "Ah le batard!" }}
+            outerContainerStyles={{ backgroundColor: '#5e7aa9', height:70 }}
+          >
+
+          </Header>
+        }
           <AppNavigator />
         </View>
       );

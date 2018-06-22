@@ -14,7 +14,7 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={
@@ -23,7 +23,7 @@ HomeStack.navigationOptions = {
           : 'md-information-circle'
       }
     />
-  ),
+  )
 };
 
 const ContactStack = createStackNavigator({
@@ -32,12 +32,12 @@ const ContactStack = createStackNavigator({
 
 ContactStack.navigationOptions = {
   tabBarLabel: 'Contacts',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-contact${focused ? '' : '-outline'}` : 'md-contact'}
     />
-  ),
+  )
 };
 
 const AlertStack = createStackNavigator({
@@ -46,12 +46,12 @@ const AlertStack = createStackNavigator({
 
 AlertStack.navigationOptions = {
   tabBarLabel: 'Alert',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-alert${focused ? '' : '-outline'}` : 'md-alert'}
     />
-  ),
+  )
 };
 
 const SettingsStack = createStackNavigator({
@@ -60,17 +60,30 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
     />
-  ),
+  )
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  ContactStack,
-  AlertStack,
-  SettingsStack,
+export default createBottomTabNavigator(
+{
+ HomeStack,
+ ContactStack,
+ AlertStack,
+ SettingsStack,
+ ContactStack
+},
+{
+
+ tabBarOptions :
+ { activeTintColor: '#13f6af',
+ inactiveTintColor: '#aaaaaa',
+   style: {
+    backgroundColor: '#5e7aa9',
+ }
+}
+
 });

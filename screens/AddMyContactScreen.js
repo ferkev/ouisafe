@@ -66,7 +66,7 @@ showFirstContactAsync() {
 }
 
 onHandleClick(name, number){
-
+  
 
   console.log('coucou', name, number)
 }

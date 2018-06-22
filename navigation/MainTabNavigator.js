@@ -7,6 +7,9 @@ import HomeScreen from '../screens/HomeScreen';
 import ContactScreen from '../screens/ContactScreen';
 import AlertScreen from '../screens/AlertScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AddMyContactScreen from '../screens/AddMyContactScreen';
+
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -26,19 +29,6 @@ HomeStack.navigationOptions = {
   )
 };
 
-const ContactStack = createStackNavigator({
-  Contact: ContactScreen,
-});
-
-ContactStack.navigationOptions = {
-  tabBarLabel: 'Contacts',
-  tabBarIcon: ({ focused, tintColor }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-contact${focused ? '' : '-outline'}` : 'md-contact'}
-    />
-  )
-};
 
 const AlertStack = createStackNavigator({
   Alert: AlertScreen,
@@ -68,6 +58,24 @@ SettingsStack.navigationOptions = {
   )
 };
 
+
+
+const ContactStack = createStackNavigator({
+  Contacts: ContactScreen,
+  AddMyContact : AddMyContactScreen
+});
+
+ContactStack.navigationOptions = {
+  tabBarLabel: 'Contacts',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+    />
+  )
+};
+
+
 export default createBottomTabNavigator(
 {
  HomeStack,
@@ -79,10 +87,10 @@ export default createBottomTabNavigator(
 {
 
  tabBarOptions :
- { activeTintColor: '#13f6af',
+ {activeTintColor: '#13f6af',
  inactiveTintColor: '#aaaaaa',
    style: {
-    backgroundColor: '#5e7aa9',
+    backgroundColor: 'blue',
  }
 }
 

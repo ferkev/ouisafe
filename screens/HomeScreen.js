@@ -18,6 +18,7 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>

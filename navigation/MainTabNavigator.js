@@ -82,14 +82,4 @@ export default createBottomTabNavigator(
   AlertStack,
   SettingsStack,
   ContactStack
-},
-{ 
-
-  tabBarOptions : 
-  {
-    style: {
-     backgroundColor: 'blue',
-  }
-}
-
 });

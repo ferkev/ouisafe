@@ -19,11 +19,12 @@ export default class AddMyContactScreen extends React.Component {
     title: 'AddMyContact'
   };
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       error : " Vous n'avez importé aucun contact",
-      contact : []
+      contact : [],
+      importedContact: this.props.navigation.state.params.importContact
     }
   }
 
@@ -66,9 +67,10 @@ showFirstContactAsync() {
 }
 
 onHandleClick(name, number){
-
-
-  console.log('coucou', name, number)
+  this.setState({
+    importedContact : [...this.state.importedContact, name, number]
+  })
+  alert('Contact ajouté')
   // console.log(this.props.navigation)
 }
 
@@ -79,7 +81,7 @@ onHandleClick(name, number){
 
   render(){
 
-
+    console.log(this.state.importedContact)
     let number;
     // const icon = {
     //   icon: "md-add-circle"

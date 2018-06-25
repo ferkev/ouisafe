@@ -1,32 +1,106 @@
 import React, { Component } from 'react';
 import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
-import { Text } from 'react-native-elements';
+import { Text, ButtonGroup } from 'react-native-elements';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+
 
 import { Icon } from 'expo';
 
+import AlertA from '../components/AlertA';
+import AlertB from '../components/AlertB';
+import AlertC from '../components/AlertC';
+
+
 
 export default class AlertLayer extends React.Component {
+  static navigationOptions = {
+    title: 'AlertLayer'
+  };
 
-state = {
+constructor () {
+    super()
+this.state = {
+  showComponent: 1,
+
   person : [
     {FirstName: "Maximilian", LastName: "Schneider", Age: "25"}
   ]
+}
+this.ChangeToA = this.ChangeToA.bind(this)
+this.ChangeToB = this.ChangeToB.bind(this)
+this.ChangeToC = this.ChangeToC.bind(this)
+this.updateIndex = this.updateIndex.bind(this)
+
+
+}
+
+updateIndex (selectedIndex) {
+  this.setState({selectedIndex})
+}
+
+ChangeToA(){
+  this.setState({showComponent : 1})
+  console.log("change to a is working")
+}
+
+ChangeToB(){
+  this.setState({showComponent : 2});
+  console.log("change to b is working")
+
+}
+
+ChangeToC(){
+  this.setState({showComponent : 3});
+  console.log("change to c is working")
+
 }
 
 
 
 
+
   render() {
+    const DisplayA = () => <Text       onPress={this.ChangeToA}>Securité</Text>
+    const DisplayB = () => <Text       onPress={this.ChangeToB}>Santé</Text>
+    const DisplayC = () => <Text       onPress={this.ChangeToC}>Contact</Text>
+
+    const buttons = [{ element: DisplayA}, { element: DisplayB }, { element: DisplayC }]
+    const { selectedIndex } = this.state
+
+    if(this.ChangeToA){
+      console.log("")
+    }
+
+    var alert;
+    if(this.state.showComponent == 1) {
+        alert = <AlertA/>
+    } else if (this.state.showComponent == 2){
+      alert = <AlertB/>
+    } else {
+      alert = <AlertC/>
+    }
+
     console.log("mon gps -->", this.props.position)
     return (
       <View>
-      <Text h4 style={styles.alertheadline}> Alert </Text>
-<Text style={styles.headline}> Cette message est envoyé aux contactes selectionnés dans la section Contacts et egalement a la police. </Text>
-      <View style={styles.background, styles.border}>
-      <Text> Hello je suis {this.state.person[0].FirstName} {this.state.person[0].LastName} et je me retrouve en danger. Mon GPS: {this.props.position}  </Text>
+      <ButtonGroup
+      selectedIndex={selectedIndex}
+      buttons={buttons}
+      containerStyle={{height: 30, backgroundColor:"#9fe1b1"}}
+      selectedButtonStyle={{
+        focus:"red"
+      }}
+       />
+
+      {alert}
+
+
+      <Text  style={styles.headline}> Mon GPS: {this.props.position}  </Text>
+
+
       </View>
-      </View>
+
     );
   }
 }
@@ -51,12 +125,9 @@ border: {
 
   headline: {
         alignItems: 'center',
-        paddingLeft: '3%',
-        paddingRight: '3%',
-        paddingTop: '1%',
-        marginTop:'0%',
-        marginLeft: '5%',
-        marginRight: '5%',
+        paddingLeft: '6%',
+        paddingRight: '0%',
+        marginRight: '6%',
 
 
 

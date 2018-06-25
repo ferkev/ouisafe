@@ -7,6 +7,9 @@ import HomeScreen from '../screens/HomeScreen';
 import ContactScreen from '../screens/ContactScreen';
 import AlertScreen from '../screens/AlertScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AddMyContactScreen from '../screens/AddMyContactScreen';
+
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -14,7 +17,7 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={
@@ -23,22 +26,9 @@ HomeStack.navigationOptions = {
           : 'md-information-circle'
       }
     />
-  ),
+  )
 };
 
-const ContactStack = createStackNavigator({
-  Contact: ContactScreen,
-});
-
-ContactStack.navigationOptions = {
-  tabBarLabel: 'Contacts',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-contact${focused ? '' : '-outline'}` : 'md-contact'}
-    />
-  ),
-};
 
 const AlertStack = createStackNavigator({
   Alert: AlertScreen,
@@ -46,12 +36,12 @@ const AlertStack = createStackNavigator({
 
 AlertStack.navigationOptions = {
   tabBarLabel: 'Alert',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-alert${focused ? '' : '-outline'}` : 'md-alert'}
     />
-  ),
+  )
 };
 
 const SettingsStack = createStackNavigator({
@@ -60,17 +50,48 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
     />
-  ),
+  )
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  ContactStack,
-  AlertStack,
-  SettingsStack,
+
+
+const ContactStack = createStackNavigator({
+  Contacts: ContactScreen,
+  AddMyContact : AddMyContactScreen
+});
+
+ContactStack.navigationOptions = {
+  tabBarLabel: 'Contacts',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+    />
+  )
+};
+
+
+export default createBottomTabNavigator(
+{
+ HomeStack,
+ ContactStack,
+ AlertStack,
+ SettingsStack,
+ ContactStack
+},
+{
+
+ tabBarOptions :
+ {activeTintColor: '#13f6af',
+ inactiveTintColor: '#aaaaaa',
+   style: {
+    backgroundColor: 'blue',
+ }
+}
+
 });

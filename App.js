@@ -1,7 +1,16 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+import { reducer as formReducer } from 'redux-form';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
+
 import AppNavigator from './navigation/AppNavigator';
+import isVisible from './reducer/modaluser.reducer';
+
+
+var globalReducers= combineReducers({form: formReducer, isVisible});
+const store = createStore(globalReducers);
 
 export default class App extends React.Component {
   state = {
@@ -19,10 +28,12 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+        <Provider store={ store }>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+          </View>
+        </Provider>
       );
     }
   }

@@ -46,10 +46,10 @@ class UserForm extends React.Component {
       }
     });
   }
-  
+
 
   render() {
-    
+
     return (
       <View>
 
@@ -67,7 +67,7 @@ class UserForm extends React.Component {
         </View>
         </ScrollView>
       </Overlay>
-     
+
       </View>);
   }
 }
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onSignInClick: function(user) {
       dispatch( {type: 'hideModalSignin'});
-      dispatch( {type: 'userSignIn', user} ) 
+      dispatch( {type: 'userSignIn', user} )
     },
 
     onSignUpClick: function(user) {

@@ -1,9 +1,17 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
-import { Header } from 'react-native-elements';
+import { reducer as formReducer } from 'redux-form';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
 
+import AppNavigator from './navigation/AppNavigator';
+import isVisible from './reducer/modaluser.reducer';
+
+
+var globalReducers= combineReducers({form: formReducer, isVisible});
+const store = createStore(globalReducers);
+import { Header } from 'react-native-elements';
 
 export default class App extends React.Component {
   state = {
@@ -21,18 +29,18 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' &&
-          <Header
+        <Provider store={ store }>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <Header
             statusBarProps={{ barStyle: 'light-content', color:'white'  }}
             centerComponent={{ text: "Ah le batard!" }}
             outerContainerStyles={{ backgroundColor: '#5e7aa9', height:70 }}
           >
 
-          </Header>
-        }
-          <AppNavigator />
-        </View>
+          </Header>}
+            <AppNavigator />
+          </View>
+        </Provider>
       );
     }
   }

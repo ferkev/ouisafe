@@ -20,7 +20,7 @@ function textInput(props) {
 class SignUp extends React.Component {
   render() {
     return (
-      <KeyboardAwareScrollView style={styles.container}>
+      <KeyboardAwareScrollView>
 
       <View style={styles.inputContainer}>
         <Text>Pas encore de compte ?</Text>

@@ -66,11 +66,16 @@ showFirstContactAsync() {
 
 }
 
-onHandleClick(name, number){
-  this.setState({
-    importedContact : [...this.state.importedContact, name, number]
-  })
-  alert('Contact ajouté')
+onHandleClick(name, number, index){
+  if(this.state.importedContact.contactName.indexOf(name) < 0){
+    this.setState({
+      importedContact :{
+          contactName:  [...this.state.importedContact.contactName, name],
+          contactNumber : [...this.state.importedContact.contactNumber, number]
+      }
+    })
+    alert('Contact ajouté')
+  }
   // console.log(this.props.navigation)
 }
 
@@ -81,7 +86,7 @@ onHandleClick(name, number){
 
   render(){
 
-    console.log(this.state.importedContact)
+    console.log(this.state.importedContact.contactName, this.state.importedContact.contactNumber)
     let number;
     // const icon = {
     //   icon: "md-add-circle"
@@ -89,23 +94,23 @@ onHandleClick(name, number){
 
     //<Icon name="ios-add" size={30} color="#4F8EF7" />
 
-            if(this.state.contact.data){
+    if(this.state.contact.data){
 
-              number = this.state.contact.data.map((contactList , index)=>{
+      number = this.state.contact.data.map((contactList , index)=>{
 
-                if(contactList.phoneNumbers[0] != undefined && contactList.name != undefined){
+        if(contactList.phoneNumbers[0] != undefined && contactList.name != undefined){
+          
+          return <ListItem  key ={index} 
                   
-                  return <ListItem  key ={index} 
-                          
-                        title={contactList.name} 
-                        subtitle={contactList.phoneNumbers[0].number}  
-                        rightIcon={ <Icon onPress={ ()=>{this.onHandleClick(contactList.name, contactList.phoneNumbers[0].number )}} name="ios-add" size={30} color="#4F8EF7" /> }
-                        hideChevron= {false} />
-                }
+            title={contactList.name} 
+            subtitle={contactList.phoneNumbers[0].number}  
+            rightIcon={ <Icon onPress={ ()=>{this.onHandleClick(contactList.name, contactList.phoneNumbers[0].number, index )}} name="ios-add" size={30} color="#4F8EF7" /> }
+            hideChevron= {false} />
+        }
 
-              })
+      })
 
-            }
+    }
 
   	return(
   		<View style= {styles.container}>

@@ -38,7 +38,7 @@ class UserForm extends React.Component {
     body: 'firstName=values.firstName&lastName=values.lastName&email=values.email&password=values.password&telephone=vales.telephone'
     })
     .then(function(response){
-    return response.JSON();
+    return response.json();
     })
     .then(function(data) {
       if(data._id){

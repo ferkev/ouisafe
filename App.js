@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View} from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers, createStore } from 'redux';
@@ -18,7 +18,10 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
 
+
+
   render() {
+
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -61,6 +64,7 @@ export default class App extends React.Component {
     ]);
   };
 
+
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
@@ -71,6 +75,9 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, ScrollView, StyleSheet, View, ActivityIndicator, AppRegistry, } from 'react-native';
+import { Platform, Text, ScrollView, StyleSheet, View, ActivityIndicator, AppRegistry, Button } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import { MapView, Marker, Constants, Location, Permissions } from 'expo';
 import { Overlay, Divider, Header, ButtonGroup } from 'react-native-elements';
@@ -124,9 +124,12 @@ console.log(this.state.location);
               />
           </MapView>
         />;
+        <View>
+          <Button title="envoyer une alerte" onPress= {()=>{this.props.navigation.navigate('Contacts')}}/>
+        </View>
 
-
-        </View>)
+        </View>
+        )
 
     } else {
       return (

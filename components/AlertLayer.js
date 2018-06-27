@@ -9,7 +9,6 @@ import { Icon } from 'expo';
 
 import AlertA from '../components/AlertA';
 import AlertB from '../components/AlertB';
-import AlertC from '../components/AlertC';
 
 
 
@@ -29,7 +28,6 @@ this.state = {
 }
 this.ChangeToA = this.ChangeToA.bind(this)
 this.ChangeToB = this.ChangeToB.bind(this)
-this.ChangeToC = this.ChangeToC.bind(this)
 this.updateIndex = this.updateIndex.bind(this)
 
 
@@ -50,11 +48,7 @@ ChangeToB(){
 
 }
 
-ChangeToC(){
-  this.setState({showComponent : 3});
-  console.log("change to c is working")
 
-}
 
 
 
@@ -63,9 +57,8 @@ ChangeToC(){
   render() {
     const DisplayA = () => <Text       onPress={this.ChangeToA}>Securité</Text>
     const DisplayB = () => <Text       onPress={this.ChangeToB}>Santé</Text>
-    const DisplayC = () => <Text       onPress={this.ChangeToC}>Contact</Text>
 
-    const buttons = [{ element: DisplayA}, { element: DisplayB }, { element: DisplayC }]
+    const buttons = [{ element: DisplayA}, { element: DisplayB }]
     const { selectedIndex } = this.state
 
     if(this.ChangeToA){
@@ -77,9 +70,7 @@ ChangeToC(){
         alert = <AlertA/>
     } else if (this.state.showComponent == 2){
       alert = <AlertB/>
-    } else {
-      alert = <AlertC/>
-    }
+    } 
 
     console.log("mon gps -->", this.props.position)
     return (
@@ -88,9 +79,7 @@ ChangeToC(){
       selectedIndex={selectedIndex}
       buttons={buttons}
       containerStyle={{height: 30, backgroundColor:"#9fe1b1"}}
-      selectedButtonStyle={{
-        focus:"red"
-      }}
+      
        />
 
       {alert}

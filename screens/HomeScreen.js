@@ -23,7 +23,7 @@ class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-    
+
 
   onHandleClick(){
     alert("Ajoutez vos contacts d'alerte dans l'onglet Contacts");
@@ -33,9 +33,9 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        
-        <UserForm isVisible={this.props.isVisible}/>
-        
+
+        <UserForm />
+
         <View style={styles.ButtonContainerStyle}>
         <ButtonRoukin onPress={this.onHandleClick}/>
         </View>

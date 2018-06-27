@@ -4,6 +4,7 @@ import { Input, Button } from 'react-native-elements';
 import { reduxForm, Field } from "redux-form";
 
 
+
 function textInput(props) {
   const { input } = props;
   return (

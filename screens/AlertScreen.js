@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Platform, Text, ScrollView, StyleSheet, View, ActivityIndicator, AppRegistry, } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import { MapView, Marker, Constants, Location, Permissions } from 'expo';
-import { Overlay, Divider, Header } from 'react-native-elements';
+import { Overlay, Divider, Header, ButtonGroup } from 'react-native-elements';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+
 
 import AlertLayer from '../components/AlertLayer';
 
@@ -12,14 +14,21 @@ export default class AlertScreen extends Component {
     header: null,
   };
 
+  constructor () {
+    super()
+    this.state = {
+      location: null,
+      errorMessage: null,
+      adress: null,
+      gps: null,
+      isVisible: false,
+      selectedIndex: 2
+    }
+  }
 
-  state = {
-    location: null,
-    errorMessage: null,
-    adress: null,
-    gps: null,
-    isVisible: false,
-  };
+
+
+
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -57,7 +66,9 @@ export default class AlertScreen extends Component {
 
 
 
+
   render() {
+
 
 
 
@@ -91,6 +102,7 @@ console.log(this.state.location);
     if(this.state.location && this.state.location.coords.longitude && this.state.location.coords.latitude) {
       return (
         <View style={styles.container}>
+
 
         <AlertLayer style={styles.alterstyle} position={this.state.gps}/>
 

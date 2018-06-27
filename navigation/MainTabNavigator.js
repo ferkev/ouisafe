@@ -8,6 +8,7 @@ import ContactScreen from '../screens/ContactScreen';
 import AlertScreen from '../screens/AlertScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import AddMyContactScreen from '../screens/AddMyContactScreen';
+import AlertLayer from '../components/AlertLayer';
 
 
 
@@ -32,6 +33,8 @@ HomeStack.navigationOptions = {
 
 const AlertStack = createStackNavigator({
   Alert: AlertScreen,
+  AlertLayer : AlertLayer
+
 });
 
 AlertStack.navigationOptions = {
@@ -90,7 +93,7 @@ export default createBottomTabNavigator(
  {activeTintColor: '#13f6af',
  inactiveTintColor: '#aaaaaa',
    style: {
-    backgroundColor: 'blue',
+    backgroundColor: '#5e7aa9',
  }
 }
 

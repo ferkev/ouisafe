@@ -24,7 +24,8 @@ export default class AddMyContactScreen extends React.Component {
     this.state = {
       error : " Vous n'avez importé aucun contact",
       contact : [],
-      importedContact: this.props.navigation.state.params.importContact
+      importedContact: this.props.navigation.state.params.importContact,
+      index: 0
     }
   }
 
@@ -67,13 +68,21 @@ showFirstContactAsync() {
 }
 
 onHandleClick(name, number, index){
+  console.log(index)
+  var ctx = this;
   if(this.state.importedContact.contactName.indexOf(name) < 0){
     this.setState({
       importedContact :{
           contactName:  [...this.state.importedContact.contactName, name],
           contactNumber : [...this.state.importedContact.contactNumber, number]
       }
+      // fetch('https://nameless-shore-45598.herokuapp.com/addcontact', {
+      //     method: 'POST',
+      //     headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      //     body: `contactname=${this.state.importedContact.contactName}&telephone=${this.state.importedContact.contactNumber}&contactUserId=${this.props.user._id}`
+      //   })
     })
+
     alert('Contact ajouté')
   }
   // console.log(this.props.navigation)

@@ -31,7 +31,7 @@ class ContactScreen extends React.Component {
       name : "",
       number : "",
       importContact:
-      { 
+      {
         contactName: [], contactNumber: []
       },
       error : []
@@ -68,7 +68,7 @@ class ContactScreen extends React.Component {
       }
 
     }
-    else if(number.length>5 && number.length<10){
+    else if(number.length>5 && number.length<11){
         this.setState({
         number : number,
         error: []
@@ -80,6 +80,8 @@ class ContactScreen extends React.Component {
     event.preventDefault()
     if( this.state.error.length === 0){
       if( this.state.number !== "" || this.state.number !== ""){
+        this.props.dispatchContact(this.state.number)
+
         // console.log(this.state.name, this.state.number)
         fetch('https://nameless-shore-45598.herokuapp.com/addcontact', {
           method: 'POST',
@@ -139,9 +141,17 @@ function mapStateToProps(state) {
   return { user : state.user}
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchContact : telcontact => {
+      dispatch({"type":"newContact", "contact":telcontact})
+    }
+  }
+}
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(ContactScreen);
 
 const styles = StyleSheet.create({

@@ -28,7 +28,7 @@ class HomeScreen extends React.Component {
         <UserForm visible= {this.props.isVisible} />
 
         <View style={styles.ButtonContainerStyle}>
-        <ButtonRoukin onPress={this.onHandleClick}/>
+        <ButtonRoukin onPress={this.handlePress}/>
         </View>
       </View>
     );

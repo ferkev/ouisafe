@@ -2,17 +2,22 @@ import React from 'react';
 import { Linking, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {connect} from 'react-redux';
 
 class ButtonRoukin extends React.Component{
 	constructor(){
 	super();
-	handlePress = () => {
-		console.log("Link clicked for " + this.props.href);
-		Linking.openURL(this.props.href);
-		this.props.onPress && this.props.onPress();
-	};
 	}
 
+componentDidMount(){
+	console.log(this.props.contact)
+}
+	handlePress = () => {
+		//requete
+		console.log("le numero de mon contact : ", this.props.contact)
+
+    Linking.openURL(`sms:${this.props.contact}`)
+   };
 	render(){
 
 		return(
@@ -26,7 +31,7 @@ class ButtonRoukin extends React.Component{
 				      color='white'
 				    />
 				  }
-				  title={this.props.title}
+				  title={'ALERTE'}
 				  buttonStyle={{
 				    backgroundColor: "rgba(92, 99,216, 1)",
 				    width: 300,
@@ -42,13 +47,12 @@ class ButtonRoukin extends React.Component{
 
 }
 
-export default class Alert extends React.Component {
-  render() {
-    return (
-      <View style={{marginVertical: 300,}}>
-        <ButtonRoukin href="sms:+33668098791" title="ALERTE" />
-      </View>
-    );
+const mapStateToProps = (globalReducers) => (globalReducers);
 
-  }
-}
+export default connect(
+	mapStateToProps,
+	null
+)(ButtonRoukin);
+
+
+// &body=`Hello je suis ${this.state.person[0].FirstName} ${this.state.person[0].LastName} et j ai besoin des pompiers.`

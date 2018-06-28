@@ -1,10 +1,16 @@
 import React from 'react';
+import { Linking, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class ButtonRoukin extends React.Component{
 	constructor(){
-super();
+	super();
+	handlePress = () => {
+		console.log("Link clicked for " + this.props.href);
+		Linking.openURL(this.props.href);
+		this.props.onPress && this.props.onPress();
+	};
 	}
 
 	render(){
@@ -12,7 +18,7 @@ super();
 		return(
 
 			<Button
-			      onPress={this.props.onPress}
+			      onPress={this.handlePress}
 				  icon={
 				    <Icon
 				      name='arrow-right'
@@ -20,7 +26,7 @@ super();
 				      color='white'
 				    />
 				  }
-				  title='ALERTE'
+				  title={this.props.title}
 				  buttonStyle={{
 				    backgroundColor: "rgba(92, 99,216, 1)",
 				    width: 300,
@@ -29,13 +35,20 @@ super();
 				    borderWidth: 0,
 				    borderRadius: 100
 				  }}
-				  containerStyle={{ marginTop: 20 }}
+				  containerStyle={{ marginTop: 0, alignItems: 'center', justifyContent: 'center' }}
 				/>
 				)
 			}
 
 }
 
-export default ButtonRoukin;
+export default class Alert extends React.Component {
+  render() {
+    return (
+      <View style={{marginVertical: 300,}}>
+        <ButtonRoukin href="sms:+33668098791" title="ALERTE" />
+      </View>
+    );
 
-
+  }
+}

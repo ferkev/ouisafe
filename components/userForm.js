@@ -19,9 +19,9 @@ class UserForm extends React.Component {
 
   submitSignIn(values) {
     var ctx= this;
-    fetch('http://192.168.19.2:3000/signin?email='+values.email+'&password='+values.password)
+    fetch('https://nameless-shore-45598.herokuapp.com/signin?email='+values.email+'&password='+values.password)
     .then(function(response){
-    return response.JSON();
+    return response.json();
     })
     .then(function(data) {
       if(data._id){
@@ -32,19 +32,19 @@ class UserForm extends React.Component {
 
   submitSignUp(values) {
     var ctx= this;
-    fetch('http://192.168.19.2:3000/signup', {
+    fetch('https://nameless-shore-45598.herokuapp.com/signup', {
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
-    body: 'firstName=values.firstName&lastName=values.lastName&email=values.email&password=values.password&telephone=vales.telephone'
+    body: 'firstname='+values.firstName+'&lastname='+values.lastName+'&email='+values.email+'&password='+values.password+'&telephone='+values.telephone
     })
     .then(function(response){
-    return response.JSON();
+    return response.json();
     })
     .then(function(data) {
       if(data._id){
         ctx.props.onSignUpClick(data);
       }
-    });
+    })
   }
 
 

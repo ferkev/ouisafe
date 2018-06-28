@@ -1,15 +1,15 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View} from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
-
+import UserSignin from './reducer/user.reducer'
 import AppNavigator from './navigation/AppNavigator';
 import isVisible from './reducer/modaluser.reducer';
 
 
-var globalReducers= combineReducers({form: formReducer, isVisible});
+var globalReducers= combineReducers({form: formReducer, isVisible : isVisible, user: UserSignin});
 const store = createStore(globalReducers);
 import { Header } from 'react-native-elements';
 
@@ -17,6 +17,8 @@ export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -33,7 +35,7 @@ export default class App extends React.Component {
           <View style={styles.container}>
             {Platform.OS === 'ios' && <Header
             statusBarProps={{ barStyle: 'light-content', color:'white'  }}
-            centerComponent={{ text: "Ah le batard!" }}
+            centerComponent={{ text: "Ouisafe" }}
             outerContainerStyles={{ backgroundColor: '#5e7aa9', height:70 }}
           >
 
@@ -61,6 +63,7 @@ export default class App extends React.Component {
     ]);
   };
 
+
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
@@ -71,6 +74,9 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {

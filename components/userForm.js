@@ -8,34 +8,38 @@ import userForm from './userForm';
 
 
 
-
 class UserForm extends React.Component {
-
    constructor(props) {
      super(props);
     this.submitSignIn = this.submitSignIn.bind(this);
     this.submitSignUp = this.submitSignUp.bind(this);
   }
 
+  //     fetch('https://nameless-shore-45598.herokuapp.com/signin?email='+values.email+'&password='+values.password)
+
+
   submitSignIn(values) {
     var ctx= this;
-    fetch('http://192.168.19.2:3000/signin?email='+values.email+'&password='+values.password)
+    fetch(`https://nameless-shore-45598.herokuapp.com/signin?email=${values.email}&password=${values.password}`)
     .then(function(response){
-    return response.JSON();
+    return response.json();
     })
     .then(function(data) {
       if(data._id){
         ctx.props.onSignInClick(data);
       }
+    }).catch(function(error){
+      console.log(error)
     });
   }
 
   submitSignUp(values) {
     var ctx= this;
-    fetch('http://192.168.19.2:3000/signup', {
+    fetch('https://nameless-shore-45598.herokuapp.com/signup', {
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
-    body: 'firstName=values.firstName&lastName=values.lastName&email=values.email&password=values.password&telephone=vales.telephone'
+    body: `firstName=${values.firstName}&lastName=${values.lastName}&email=${values.email}&password=${values.password}&telephone=${values.telephone}`
+
     })
     .then(function(response){
     return response.json();
@@ -44,16 +48,18 @@ class UserForm extends React.Component {
       if(data._id){
         ctx.props.onSignUpClick(data);
       }
+    }).catch(function(error){
+      console.log(error);
     });
   }
 
 
   render() {
-
+    console.log(this.props.visible)
     return (
       <View>
 
-      <Overlay isVisible={true}>
+      <Overlay isVisible={this.props.visible}>
 
         <ScrollView>
         <View style={{flex:1,justifyContent: 'center',alignItems: 'center' }}>
@@ -81,7 +87,7 @@ function mapDispatchToProps(dispatch) {
       dispatch( {type: 'userSignIn', user} )
     },
 
-    onSignUpClick: function(user) {
+    onSignUpClick: function() {
       dispatch( {type: 'hideModalSignin'});
       dispatch( {type: 'userSignUp', user} )
   }

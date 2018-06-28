@@ -30,11 +30,10 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-
     return (
       <View style={styles.container}>
 
-        <UserForm />
+        <UserForm visible= {this.props.isVisible} />
 
         <View style={styles.ButtonContainerStyle}>
         <ButtonRoukin onPress={this.onHandleClick}/>
@@ -46,7 +45,7 @@ class HomeScreen extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { isVisible: state.isVisible }
+  return { isVisible: state.isVisible, user: state.user }
 }
 
 export default connect(

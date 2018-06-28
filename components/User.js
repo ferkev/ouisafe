@@ -13,13 +13,13 @@ import {
 import { MonoText } from '../components/StyledText';
 import { connect } from 'react-redux';
 
-export default class User extends React.Component{
+class User extends React.Component{
 
 
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
-			data : []
+			data : null
 		}
 	}
 
@@ -27,34 +27,38 @@ export default class User extends React.Component{
 
 componentDidMount(){
 
-
-	const ctx = this;
-	fetch('https://nameless-shore45598.herokuapp.com/signin').then((response)=>{
-	 	return response.json()
-	 }).then((data)=>{
-	 	console.log(data)
-	 	ctx.setState({data})
-	 }).catch(function(error) {
-	    console.log('Request failed', error)
-	});
-
+	console.log(this.props.user)
 
 	}
 
 
 
 	render(){
+
+
+
 		return(
 
+
 			<View>
-				<Text> je suis un user</Text>
+			
+				<Text>rien</Text>
 			</View>
 
 
 		)
 	}
 
-
 }
+
+
+function mapStateToProps(state) {
+  return { user : state.user}
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(User);
 
 

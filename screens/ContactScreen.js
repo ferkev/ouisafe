@@ -13,6 +13,8 @@ import {
 import { MonoText } from '../components/StyledText';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import AddMyContactScreen from '../screens/AddMyContactScreen';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 import { connect } from 'react-redux';
 
@@ -34,9 +36,26 @@ class ContactScreen extends React.Component {
       {
         contactName: [], contactNumber: []
       },
-      error : []
+      error : [],
+      data : []
     }
 
+  }
+
+
+  componentDidMount(){
+    var ctx = this;
+    fetch(`https://nameless-shore-45598.herokuapp.com/findcontact?userId=${this.props.user._id}`
+      ).then(function(response) {
+          return response.json();
+        }).then(function(data) {
+           console.log(data);
+           ctx.setState({
+              data
+           })
+        }).catch(function(error) {
+          console.log('Request failed', error)
+        })
   }
 
 
@@ -78,6 +97,7 @@ class ContactScreen extends React.Component {
 
   onHandleSubmit(event){
     event.preventDefault()
+    var ctx = this;
     if( this.state.error.length === 0){
       if( this.state.number !== "" || this.state.number !== ""){
         this.props.dispatchContact(this.state.number)
@@ -86,11 +106,13 @@ class ContactScreen extends React.Component {
         fetch('https://nameless-shore-45598.herokuapp.com/addcontact', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body: `contactname=${this.state.name}&telephone=${this.state.number}`
+          body: `contactname=${this.state.name}&telephone=${this.state.number}&contactUserId=${this.props.user._id}`
         }).then(function(response) {
           return response.json();
         }).then(function(data) {
-           console.log(data);
+           ctx.setState({
+               data : [...ctx.state.data, data]
+           })
         }).catch(function(error) {
           console.log('Request failed', error)
         });
@@ -106,6 +128,14 @@ class ContactScreen extends React.Component {
   render(){
           console.log(this.props.user)
 
+
+           const contact = this.state.data.map((element, index)=>{
+             return <View key ={index}> 
+                        <Text>{element.contactname}</Text> 
+                        <Text>{element.telephone}</Text>
+                      </View>
+           })
+
           let error;
 
           if(this.state.error.length > 0 ){
@@ -118,7 +148,6 @@ class ContactScreen extends React.Component {
 
       <View style={{ padding : 10, margin: "auto"}}>
         <ScrollView style={{ width: "100%" , height: "100%"}}>
-
         <View>
           <TextInput value= {this.state.name} onChangeText= {(text)=>{ this.onChangeName(text)}} style={{borderColor: 'gray', borderWidth: 1, marginBottom: 10}} placeholder="Nom du contact max 10 caracteres et min 5" />
           <TextInput   keyboardType = "numeric" value= {this.state.number} onChangeText = {(number)=>{this.onChangeNumber(number)}} style={{borderColor: 'gray', borderWidth: 1}} placeholder="Numero du contact" />
@@ -130,6 +159,7 @@ class ContactScreen extends React.Component {
 
             })
         }} />
+        {contact}
         </ScrollView>
       </View>
 

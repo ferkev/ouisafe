@@ -6,11 +6,12 @@ import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import UserSignin from './reducer/user.reducer'
 import Contact from './reducer/contact.reducer'
+import gps from './reducer/gps.reducer'
 import AppNavigator from './navigation/AppNavigator';
 import isVisible from './reducer/modaluser.reducer';
 
 
-var globalReducers= combineReducers({form: formReducer, isVisible : isVisible, user: UserSignin, contact: Contact});
+var globalReducers= combineReducers({form: formReducer, isVisible : isVisible, user: UserSignin, contact: Contact, gps: gps});
 const store = createStore(globalReducers);
 import { Header } from 'react-native-elements';
 

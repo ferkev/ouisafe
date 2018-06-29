@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  Button,
   TouchableOpacity,
   View,
   TextInput
@@ -14,6 +13,7 @@ import { MonoText } from '../components/StyledText';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import AddMyContactScreen from '../screens/AddMyContactScreen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Button } from 'react-native-elements';
 
 
 import { connect } from 'react-redux';
@@ -49,7 +49,6 @@ class ContactScreen extends React.Component {
       ).then(function(response) {
           return response.json();
         }).then(function(data) {
-           console.log(data);
            ctx.setState({
               data
            })
@@ -99,7 +98,7 @@ class ContactScreen extends React.Component {
     event.preventDefault()
     var ctx = this;
     if( this.state.error.length === 0){
-      if( this.state.number !== "" || this.state.number !== ""){
+      if( this.state.number !== "" || this.state.number !== "" && this.props.user._id){
         this.props.dispatchContact(this.state.number)
 
         // console.log(this.state.name, this.state.number)
@@ -126,13 +125,25 @@ class ContactScreen extends React.Component {
 
 
   render(){
-          console.log(this.props.user)
+    if(this.props.user._id){
+      var ctx = this;
+      fetch(`https://nameless-shore-45598.herokuapp.com/findcontact?userId=${this.props.user._id}`
+      ).then(function(response) {
+          return response.json();
+        }).then(function(data) {
+           ctx.setState({
+              data
+           })
+        }).catch(function(error) {
+          console.log('Request failed', error)
+        })
+    }
 
 
            const contact = this.state.data.map((element, index)=>{
-             return <View key ={index}> 
-                        <Text>{element.contactname}</Text> 
-                        <Text>{element.telephone}</Text>
+             return <View key ={index} style= {{ backgroundColor: '#5e7aa9', borderRadius: 5, marginTop: 5, marginBottom: 5}}> 
+                        <Text style={{color:"#fff" }}>{element.contactname}</Text> 
+                        <Text style={{color: "#fff"}}>{element.telephone}</Text>
                       </View>
            })
 
@@ -149,17 +160,41 @@ class ContactScreen extends React.Component {
       <View style={{ padding : 10, margin: "auto"}}>
         <ScrollView style={{ width: "100%" , height: "100%"}}>
         <View>
-          <TextInput value= {this.state.name} onChangeText= {(text)=>{ this.onChangeName(text)}} style={{borderColor: 'gray', borderWidth: 1, marginBottom: 10}} placeholder="Nom du contact max 10 caracteres et min 5" />
-          <TextInput   keyboardType = "numeric" value= {this.state.number} onChangeText = {(number)=>{this.onChangeNumber(number)}} style={{borderColor: 'gray', borderWidth: 1}} placeholder="Numero du contact" />
-          <Button title="Ajouter un contact" onPress={(event)=>{this.onHandleSubmit(event)}} />
+          <TextInput value= {this.state.name} onChangeText= {(text)=>{ this.onChangeName(text)}} style={{borderColor: 'gray', borderWidth: 1, marginBottom: 10, borderRadius: 5, padding: 10}} placeholder="Nom du contact max 10 caracteres et min 5" />
+          <TextInput   keyboardType = "numeric" value= {this.state.number} onChangeText = {(number)=>{this.onChangeNumber(number)}} style={{borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 10}} placeholder="Numero du contact" />
+          <View>{error}</View>
+          <Button  title="Ajouter un contact" onPress={(event)=>{this.onHandleSubmit(event)}} buttonStyle={{
+            backgroundColor: "#13f6af",
+            width: 180,
+            height: 38,
+            borderColor: "transparent",
+            borderWidth: 0,
+            borderRadius: 8, 
+            marginLeft : 'auto',
+            marginRight : 'auto',
+            marginBottom: 5,
+            marginTop: 5,
+          }}/>
         </View>
-        <View>{error}</View>
-        <Button title='Importer un contact' onPress={()=>{this.props.navigation.navigate('AddMyContact', {
+        <Button  title='Importer un contact' onPress={()=>{this.props.navigation.navigate('AddMyContact', {
               importContact: this.state.importContact,
 
             })
-        }} />
-        {contact}
+        }} buttonStyle={{
+            backgroundColor: "#13f6af",
+            width: 180,
+            height: 38,
+            borderColor: "transparent",
+            borderWidth: 0,
+            borderRadius: 8,
+            marginLeft : 'auto',
+            marginRight : 'auto',
+            marginBottom: 5,
+            marginTop: 5,
+          }} />
+        <View style={styles.container}>
+          {contact}
+        </View>
         </ScrollView>
       </View>
 
@@ -188,6 +223,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
   },
 });

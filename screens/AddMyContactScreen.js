@@ -73,7 +73,7 @@ onHandleClick(name, number, index){
   // console.log(index)
   var ctx = this;
 
-  if(this.state.importedContact.contactName.indexOf(name) < 0){
+  if(this.state.importedContact.contactName.indexOf(name) < 0 && this.props.user._id){
     this.setState({
       importedContact :{
           contactName:  [...this.state.importedContact.contactName, name],
@@ -81,7 +81,6 @@ onHandleClick(name, number, index){
       }
 
     })
-    console.log(name)
     fetch('https://nameless-shore-45598.herokuapp.com/addcontact', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},

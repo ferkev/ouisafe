@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { MonoText } from '../components/StyledText';
 import { connect } from 'react-redux';
+import { ListItem } from 'react-native-elements';
 
 class User extends React.Component{
 
@@ -28,6 +29,11 @@ class User extends React.Component{
 componentDidMount(){
 
 	console.log(this.props.user)
+	if( this.props.user._id){
+		this.setState({
+			data : this.props.user
+		})
+	}
 
 	}
 
@@ -36,14 +42,12 @@ componentDidMount(){
 	render(){
 
 
-
 		return(
 
-
 			<View>
-			
-				<Text>rien</Text>
+			 
 			</View>
+
 
 
 		)

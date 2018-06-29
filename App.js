@@ -37,7 +37,7 @@ export default class App extends React.Component {
           <View style={styles.container}>
             {Platform.OS === 'ios' && <Header
             statusBarProps={{ barStyle: 'light-content', color:'white'  }}
-            centerComponent={{ text: "Ouisafe" }}
+            centerComponent={{ text: "Ouisafe", style: { color: '#fff' }}}
             outerContainerStyles={{ backgroundColor: '#5e7aa9', height:70 }}
           >
 

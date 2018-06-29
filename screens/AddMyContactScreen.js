@@ -12,9 +12,11 @@ import {
 import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { MonoText } from '../components/StyledText';
+import { connect } from 'react-redux';
 
 
-export default class AddMyContactScreen extends React.Component {
+
+class AddMyContactScreen extends React.Component {
   static navigationOptions = {
     title: 'AddMyContact'
   };
@@ -68,22 +70,25 @@ showFirstContactAsync() {
 }
 
 onHandleClick(name, number, index){
-  console.log(index)
+  // console.log(index)
   var ctx = this;
+
   if(this.state.importedContact.contactName.indexOf(name) < 0){
     this.setState({
       importedContact :{
           contactName:  [...this.state.importedContact.contactName, name],
           contactNumber : [...this.state.importedContact.contactNumber, number]
       }
-      // fetch('https://nameless-shore-45598.herokuapp.com/addcontact', {
-      //     method: 'POST',
-      //     headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      //     body: `contactname=${this.state.importedContact.contactName}&telephone=${this.state.importedContact.contactNumber}&contactUserId=${this.props.user._id}`
-      //   })
-    })
 
-    alert('Contact ajouté')
+    })
+    console.log(name)
+    fetch('https://nameless-shore-45598.herokuapp.com/addcontact', {
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: `contactname=${name}&telephone=${number}&contactUserId=${this.props.user._id}`
+        })
+        
+      alert('Contact ajouté')
   }
   // console.log(this.props.navigation)
 }
@@ -92,10 +97,11 @@ onHandleClick(name, number, index){
 //   console.log(this.props.navigation)
 // }
 
+  
 
   render(){
-
-    console.log(this.state.importedContact.contactName, this.state.importedContact.contactNumber)
+          // console.log(this.state.importedContact.contactName[this.state.index])
+    // console.log(this.state.importedContact.contactName, this.state.importedContact.contactNumber)
     let number;
     // const icon = {
     //   icon: "md-add-circle"
@@ -132,6 +138,14 @@ onHandleClick(name, number, index){
   }
 }
 
+function mapStateToProps(state) {
+  return { user : state.user}
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(AddMyContactScreen);
 
 
 const styles = StyleSheet.create({

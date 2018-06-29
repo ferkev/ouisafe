@@ -14,7 +14,7 @@ export default class AlertA extends React.Component {
     showComponent: 1,
 
     person : [
-      {FirstName: "Maximilian", LastName: "Schneider", Age: "25"}
+      {FirstName: "François", LastName: "Coucke", Age: "25"}
     ]
   }
 }
@@ -22,9 +22,9 @@ export default class AlertA extends React.Component {
   render() {
     return (
       <View>
-      <Text style={styles.headline}> Cette message est envoyé aux contactes selectionnés dans la section Contacts et egalement a la police. </Text>
+      <Text style={styles.headline}>Ce message pré-rédigé sera envoyé aux contacts enregistrés dans la section Contacts. </Text>
       <View style={styles.background, styles.border}>
-      <Text> Hello je suis {this.state.person[0].FirstName} {this.state.person[0].LastName} et je contacte la police car je suis en danger.  </Text>
+      <Text>Bonjour je suis {this.state.person[0].FirstName} {this.state.person[0].LastName} je te contacte car je suis en danger et j'ai besoin d'aide, voici l'endroit où je me trouve actuellement.  </Text>
         </View>
       </View>
     );

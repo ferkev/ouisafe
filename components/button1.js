@@ -16,7 +16,7 @@ componentDidMount(){
 		//requete
 		console.log("le numero de mon contact : ", this.props.contact);
 		console.log("avant l'alerte : ", this.props.gps);
-		textWithoutEncoding(this.props.contact, `Hello j ai besoin des pompiers. Je me trouve ici : ${this.props.gps}` )
+		textWithoutEncoding(this.props.contact, `Bonjour, je te contacte car je suis en danger et j'ai besoin d'aide, voici l'endroit où je me trouve actuellement.  : ${this.props.gps}` )
     //Linking.openURL(`sms:${this.props.contact}`)
    };
 	render(){
@@ -34,7 +34,7 @@ componentDidMount(){
 				  }
 				  title={'ALERTE'}
 				  buttonStyle={{
-				    backgroundColor: "rgba(92, 99,216, 1)",
+				    backgroundColor: "red",
 				    width: 300,
 				    height: 45,
 				    borderColor: "transparent",

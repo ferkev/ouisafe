@@ -4,12 +4,12 @@ import { ExpoLinksView } from '@expo/samples';
 import { MapView, Marker, Constants, Location, Permissions } from 'expo';
 import { Overlay, Divider, Header, ButtonGroup } from 'react-native-elements';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import {connect} from 'react-redux';
 
 import AlertLayer from '../components/AlertLayer';
 
 
-export default class AlertScreen extends Component {
+class AlertScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -60,8 +60,9 @@ export default class AlertScreen extends Component {
 
     var gps = adress[0].name + ", " + adress[0].postalCode + ", " + adress[0].city
     this.setState({ gps });
-    console.log("gps -->", gps)
 
+    console.log("gps -->", gps)
+    this.props.dispatchgps(gps);
   }
 
 
@@ -139,6 +140,19 @@ console.log(this.state.location);
 
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchgps : coordonnees => {
+      console.log("bien arrive, pret au dispatch : ", coordonnees)
+      dispatch({"type":"newgps", "gps":coordonnees})
+    }
+  }
+}
+export default connect(
+  null,
+  mapDispatchToProps
+)(AlertScreen)
 
 const styles = StyleSheet.create({
 radius: {

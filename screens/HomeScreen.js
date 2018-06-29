@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image,Platform,ScrollView,StyleSheet,Text,TouchableOpacity,View } from 'react-native';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { reduxForm, Field } from "redux-form";
@@ -36,7 +28,7 @@ class HomeScreen extends React.Component {
         <UserForm visible= {this.props.isVisible} />
 
         <View style={styles.ButtonContainerStyle}>
-        <ButtonRoukin onPress={this.onHandleClick}/>
+        <ButtonRoukin onPress={this.handlePress}/>
         </View>
       </View>
     );
@@ -62,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   ButtonContainerStyle: {
-  justifyContent: 'flex-end',
+  justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
   margin: 20

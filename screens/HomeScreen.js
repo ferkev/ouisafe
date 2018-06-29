@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image,Platform,ScrollView,StyleSheet,Text,TouchableOpacity,View } from 'react-native';
+import { Image,Platform,ScrollView,StyleSheet,Text,TouchableOpacity,View, ImageBackground } from 'react-native';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { reduxForm, Field } from "redux-form";
@@ -24,12 +24,15 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <ImageBackground style={{flex: 1}} source={require("../assets/images/OuiSafe.png")}>
 
         <UserForm visible= {this.props.isVisible} />
 
         <View style={styles.ButtonContainerStyle}>
         <ButtonRoukin onPress={this.handlePress}/>
         </View>
+        </ImageBackground>
+
       </View>
     );
   }

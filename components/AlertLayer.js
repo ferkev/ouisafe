@@ -70,7 +70,7 @@ ChangeToB(){
         alert = <AlertA/>
     } else if (this.state.showComponent == 2){
       alert = <AlertB/>
-    } 
+    }
 
     console.log("mon gps -->", this.props.position)
     return (
@@ -78,8 +78,8 @@ ChangeToB(){
       <ButtonGroup
       selectedIndex={selectedIndex}
       buttons={buttons}
-      containerStyle={{height: 30, backgroundColor:"#9fe1b1"}}
-      
+      containerStyle={{height: 30, backgroundColor:"#13f6af"}}
+
        />
 
       {alert}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 border: {
   borderRadius: 4,
      borderWidth: 3,
-     borderColor: '#9fe1b1',
+     borderColor: '#13f6af',
      backgroundColor: '#fff',
      borderRadius: 10,
      marginTop: '5%',
